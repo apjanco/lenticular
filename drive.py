@@ -1,9 +1,13 @@
 import pickle
 import os
+import io
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from tabulate import tabulate
+from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaIoBaseDownload
+
 # From https://www.thepythoncode.com/article/using-google-drive--api-in-python
 # Which is based on: https://developers.google.com/drive/api/quickstart/python
 
@@ -83,9 +87,156 @@ def list_files(items):
         print(table)
 
 
+def download_file(service, real_file_id):
+    """Downloads a file
+    Args:
+        real_file_id: ID of the file to download
+    Returns : IO object with location.
+
+    """
+    
+    try:
+        file_id = real_file_id
+
+        # pylint: disable=maybe-no-member
+        request = service.files().get_media(fileId=file_id)
+        file = io.BytesIO()
+        downloader = MediaIoBaseDownload(file, request)
+        done = False
+        while done is False:
+            status, done = downloader.next_chunk()
+            print(F'Download {int(status.progress() * 100)}.')
+        return file.getvalue()
+    
+    except HttpError as error:
+        print(F'An error occurred: {error}')
+
+
+def list_folders(service):
+    """Search file in drive location
+    """
+
+    try:
+        files = []
+        page_token = None
+        while True:
+            # pylint: disable=maybe-no-member
+            response = service.files().list(q="mimeType = 'application/vnd.google-apps.folder'",
+                                            spaces='drive',
+                                            fields='nextPageToken, '
+                                                   'files(id, name)',
+                                            pageToken=page_token).execute()
+            for file in response.get('files', []):
+                # Process change
+                print(F'Found file: {file.get("name")}, {file.get("id")}')
+            files.extend(response.get('files', []))
+            page_token = response.get('nextPageToken', None)
+            if page_token is None:
+                break
+
+    except HttpError as error:
+        print(F'An error occurred: {error}')
+        files = None
+
+    return files
+
+def search_folder(service, folder_name):
+    """Search file in drive location
+    """
+
+    try:
+        files = []
+        page_token = None
+        while True:
+            # pylint: disable=maybe-no-member
+            response = service.files().list(q=f"name contains '{folder_name}' and mimeType = 'application/vnd.google-apps.folder'",
+                                            spaces='drive',
+                                            fields='nextPageToken, '
+                                                   'files(id, name)',
+                                            pageToken=page_token).execute()
+            for file in response.get('files', []):
+                # Process change
+                print(F'Found file: {file.get("name")}, {file.get("id")}')
+            files.extend(response.get('files', []))
+            page_token = response.get('nextPageToken', None)
+            if page_token is None:
+                break
+
+    except HttpError as error:
+        print(F'An error occurred: {error}')
+        files = None
+
+    return files
+
+
+
+def folder_contents(service, folder_id, recursive=True):
+    """Search file in drive location
+    """
+
+    try:
+        files = []
+        page_token = None
+        while True:
+            # pylint: disable=maybe-no-member
+            response = service.files().list(q=f"'{folder_id}' in parents",
+                                            spaces='drive',
+                                            fields='nextPageToken, '
+                                                   'files(id, name, mimeType, size, parents, modifiedTime)',
+                                            pageToken=page_token).execute()
+            
+            files.extend(response.get('files', []))
+            page_token = response.get('nextPageToken', None)
+            if page_token is None:
+                break
+
+    except HttpError as error:
+        print(F'An error occurred: {error}')
+        files = None
+
+    if recursive:
+        for file in files:
+            if file["mimeType"] == "application/vnd.google-apps.folder":
+                files.extend(folder_contents(service, file["id"]))
+                # drop file from files
+                files.remove(file)
+        return files
+    else:
+        return files
+
+
+def search_file(service, query):
+    """Search file in drive location
+    query syntax https://developers.google.com/drive/api/guides/search-files#examples
+    """
+
+    try:
+        files = []
+        page_token = None
+        while True:
+            # pylint: disable=maybe-no-member
+            response = service.files().list(q=query,
+                                            spaces='drive',
+                                            fields='nextPageToken, '
+                                                   'files(id, name)',
+                                            pageToken=page_token).execute()
+            for file in response.get('files', []):
+                # Process change
+                print(F'Found file: {file.get("name")}, {file.get("id")}')
+            files.extend(response.get('files', []))
+            page_token = response.get('nextPageToken', None)
+            if page_token is None:
+                break
+
+    except HttpError as error:
+        print(F'An error occurred: {error}')
+        files = None
+
+    return files
+
 def main():
-    """Shows basic usage of the Drive v3 API.
-    Prints the names and ids of the first 5 files the user has access to.
+    """
+    
     """
     service = get_gdrive_service()
     # Call the Drive v3 API
