@@ -35,3 +35,14 @@ List files
 `service.files().list()`
 Save a file to a new format
 `service.files().export_media(fileId=file_id, mimeType='application/pdf')`
+
+```python
+#TODO 
+>>> f= drive.download_file('1l02dYiSJa3r5RWb9oj8pbQxrARjz379f')
+An error occurred: <HttpError 403 when requesting 
+https://www.googleapis.com/drive/v3/files/1l02dYiSJa3r5RWb9oj8pbQxrARjz379f?alt=media returned "The user has not granted the app 
+894403265340 read access to the file 1l02dYiSJa3r5RWb9oj8pbQxrARjz379f.". Details: "[{'message': 'The user has not granted the 
+app 894403265340 read access to the file 1l02dYiSJa3r5RWb9oj8pbQxrARjz379f.', 'domain': 'global', 'reason': 
+'appNotAuthorizedToFile', 'location': 'Authorization', 'locationType': 'header'}]">
+
+```
