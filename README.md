@@ -3,38 +3,41 @@
 
 We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to continue using familiar technologies to manage their data, while developers can fetch or sync data for projects. 
 
+# Installation
+
+```
+$ pip install lenticular
+```
+
 # Usage
 
-`get_gdrive_service()` 
-Creates a service object for requests to the Google Drive API
+```python 
+from lenticular.drive import Drive 
 
-`list_all_files(folder=None)`
-Lists all files in a given drive. Returns a list of ids that can be used to download the files.
+drive = Drive() 
+```
 
-`folder_contents(service, folder_id)`
-Get all the files in a given folder
-#Lists all files and folders in a folder
-#TODO recursive search down subfolders
+--- 
+- List all folders 
+    ```python
+    folders = drive.list_folders()
+    ```
 
-`search_file(service, query)`
-Search for files in Drive with a given query. Reurns a list of file ids that can be downloaded
+- Search for a folder by name
+    ```python
+    results = drive.search_folder('folder name')
+    ```
 
-`search_folder(service, folder_name)`
-Search for a folder with a given name
+- Get a list of all the files in a folder and its subfolders
+    ```python
+    files = drive.folder_contents('folder_id')
+    ```
 
-`download_file(service, real_file_id)`
-Downloads the data of a specific file give its id
+- Fetch a file from Drive by id
+    ```python
+    file = drive.download_file('file_id')
+    ```
 
-
-Need to: 
-
-- Connect to Drive service
-- Fetch all files in a given directory
-
-List files 
-`service.files().list()`
-Save a file to a new format
-`service.files().export_media(fileId=file_id, mimeType='application/pdf')`
 
 ```python
 #TODO 

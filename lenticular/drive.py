@@ -96,7 +96,7 @@ class Drive:
         
 
     def search_folder(self, folder_name:str) -> list:
-        """Search file in drive location
+        """Search for a folder by name
         """
         return self.drive_request(f"name contains '{folder_name}' and mimeType = 'application/vnd.google-apps.folder'")
 
