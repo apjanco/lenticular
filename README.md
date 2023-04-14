@@ -1,9 +1,9 @@
 # lenticular
 😶‍🌫️ A set of tools for fetching files from the cloud
 
+We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to continue using familiar technologies to manage their data, while developers can fetch or sync data for projects. 
 
-
-# Useage
+# Usage
 
 `get_gdrive_service()` 
 Creates a service object for requests to the Google Drive API
