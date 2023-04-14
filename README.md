@@ -25,7 +25,12 @@ drive = Drive()
 
 - Search for a folder by name
     ```python
-    results = drive.search_folder('folder name')
+    results = drive.search_folders('folder name')
+    ```
+
+- Search for a file by name
+    ```python
+    results = drive.search_files('filename')
     ```
 
 - Get a list of all the files in a folder and its subfolders

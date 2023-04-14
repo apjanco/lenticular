@@ -85,7 +85,7 @@ class Drive:
         return files
     
     def folder_contents(self, folder_id):
-        """Return all files in a folder and subfolders
+        """Return all files in a folder and its subfolders
         """
         return self.drive_request(f"'{folder_id}' in parents", recursive=True)
 
@@ -94,11 +94,26 @@ class Drive:
         """
         return self.drive_request("mimeType = 'application/vnd.google-apps.folder'")
         
+    def search(self, query:str) -> list:
+        """Search using the query syntax https://developers.google.com/drive/api/guides/search-files#examples
+        """
+        return self.drive_request(f"{query}")
 
-    def search_folder(self, folder_name:str) -> list:
+    def search_folders(self, folder_name:str) -> list:
         """Search for a folder by name
         """
         return self.drive_request(f"name contains '{folder_name}' and mimeType = 'application/vnd.google-apps.folder'")
+
+    def search_files(self, query:str) -> list:
+        """Search for a file by name
+        """
+        return self.drive_request(f"name contains '{query}' and mimeType != 'application/vnd.google-apps.folder'")
+
+    def get_file_by_id(self, file_id:str) -> list:
+        """Search for a file by name
+        """
+        return self.service.files().get(fileId=file_id).execute()
+
 
     def download_file(self, file_id:str) -> io.BytesIO:
         """Downloads a file
@@ -107,7 +122,12 @@ class Drive:
         Returns : IO object with location.
 
         """
-        
+        #TODO Need to first get file mimeType 
+        mimeType = self.get_file_by_id(file_id)["mimeType"]
+        # Google Docs throw: Only files with binary content can be downloaded. Use Export with Docs Editors files.
+        # 'mimeType': 'application/vnd.google-apps.document'
+
+        # For shared files, the owner has not granted the app permission to download the file.
         try:
 
             # pylint: disable=maybe-no-member
