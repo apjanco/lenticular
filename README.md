@@ -28,5 +28,9 @@ drive = Drive()
     
 - Download a folder, (all files and subfolders)
     ```python 
-    f = drive.download_folder('10HCqZH88PUr_19-A__GllqOk4srH_ikDbrwSnQhJYUw')
+    drive.download_folder('1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G')
     ```
+
+
+Links:
+https://docs.iterative.ai/PyDrive2/
