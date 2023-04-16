@@ -10,8 +10,9 @@ from googleapiclient.http import MediaIoBaseDownload
 
 # From https://www.thepythoncode.com/article/using-google-drive--api-in-python
 # Which is based on: https://developers.google.com/drive/api/quickstart/python
+# Helful: https://developers.google.com/resources/api-libraries/documentation/drive/v2/python/latest/drive_v2.files.html
 
-SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 def get_gdrive_service():
     creds = None
@@ -77,9 +78,13 @@ class Drive:
             files = None
         
         if recursive:
+           
+
             for file in files:
                 if file["mimeType"] == "application/vnd.google-apps.folder":
                     files.extend(self.folder_contents(file["id"]))
+                    #TODO not actually recursive, only one level deep
+                    # Better to get all folders and then iterate through them
                     # drop file from files
                     files.remove(file)
         return files
@@ -110,7 +115,7 @@ class Drive:
         return self.drive_request(f"name contains '{query}' and mimeType != 'application/vnd.google-apps.folder'")
 
     def get_file_by_id(self, file_id:str) -> list:
-        """Search for a file by name
+        """Search for a file by ID
         """
         return self.service.files().get(fileId=file_id).execute()
 
@@ -123,15 +128,26 @@ class Drive:
 
         """
         #TODO Need to first get file mimeType 
-        mimeType = self.get_file_by_id(file_id)["mimeType"]
-        # Google Docs throw: Only files with binary content can be downloaded. Use Export with Docs Editors files.
-        # 'mimeType': 'application/vnd.google-apps.document'
-
-        # For shared files, the owner has not granted the app permission to download the file.
-        try:
-
-            # pylint: disable=maybe-no-member
+        file_data = self.get_file_by_id(file_id)
+        kind = file_data.get('kind')
+        mimeType = file_data.get('mimeType')
+        name = file_data.get('name')
+        # Google Docs and Sheets throw: Only files with binary content can be downloaded. Use Export with Docs Editors files.
+        
+        if mimeType == "application/vnd.google-apps.document":
+            request = self.service.files().export_media(fileId=file_id, mimeType='application/pdf')
+        if mimeType == "application/vnd.google-apps.spreadsheet":
+            request = self.service.files().export_media(fileId=file_id, mimeType='application/pdf')
+        if mimeType == "application/vnd.google-apps.presentation":
+            request = self.service.files().export_media(fileId=file_id, mimeType='application/pdf')
+        if mimeType == "application/vnd.google-apps.drawing":
+            request = self.service.files().export_media(fileId=file_id, mimeType='image/png')
+        if mimeType == "application/vnd.google-apps.form":
+            request = self.service.files().export_media(fileId=file_id, mimeType='application/pdf')            
+        else:
             request = self.service.files().get_media(fileId=file_id)
+
+        try:
             file = io.BytesIO()
             downloader = MediaIoBaseDownload(file, request)
             done = False
@@ -141,7 +157,12 @@ class Drive:
             return file.getvalue()
         
         except HttpError as error:
-            print(F'An error occurred: {error}')        
+            if error.status_code == 403:
+                print(f'A permission error occurred: {error}')
+                #also error.reason == appNotAuthorizedToFile
+                #TODO, this error occures with all files, can I create a copy and download that?
+            else:
+                print(f'An error occurred: {error}')        
     
 
 
