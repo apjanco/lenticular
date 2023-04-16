@@ -184,3 +184,37 @@ class Drive:
 
         except HttpError as error:
             print(f"An error occurred: {error}")
+
+    def download_folder(self, folder_id: str, path: str = Path.cwd(), name: str = None) -> dict:
+        """Downloads a folder
+        Args:
+            real_file_id: ID of the file to download
+        Returns : dict with name, content and suffix | None
+        ex: Path(f["name"])
+        """
+        # get folder name
+        if not name:
+            name = self.get_file_by_id(folder_id)["name"]
+
+        if isinstance(path, str):
+            path = Path(path)
+
+        # create a new directory using name 
+        path = path / name
+        path.mkdir(parents=True, exist_ok=True)
+
+
+        # get all files in all folders and subfolders
+        contents = self.folder_contents(folder_id)
+        files = [file for file in contents if file["mimeType"] != "application/vnd.google-apps.folder"]
+        for file in files:
+            self.download_file(file["id"], path=str(path))
+
+        subfolders = [folder for folder in contents if folder["mimeType"] == "application/vnd.google-apps.folder"]            
+        
+        # done = False
+        # while done is False:
+        #     pass
+            
+        
+
