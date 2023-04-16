@@ -3,6 +3,7 @@ import os
 import io
 from rich import print
 from pathlib import Path
+from tqdm import tqdm
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -168,6 +169,7 @@ class Drive:
             suffix = ".pdf"
         else:
             request = self.service.files().get_media(fileId=file_id)
+            suffix = Path(name).suffix
         try:
             file = io.BytesIO()
             downloader = MediaIoBaseDownload(file, request)
@@ -187,7 +189,7 @@ class Drive:
 
     def download_folder(
         self, folder_id: str, path: str = Path.cwd(), name: str = None
-    ) -> dict:
+    ) -> bool:
         """Downloads a folder
         Args:
             real_file_id: ID of the file to download
@@ -212,7 +214,7 @@ class Drive:
             for file in contents
             if file["mimeType"] != "application/vnd.google-apps.folder"
         ]
-        for file in files:
+        for file in tqdm(files, total=len(files), desc="Downloading files"):
             self.download_file(file["id"], path=str(path))
 
         subfolders = [
@@ -220,7 +222,7 @@ class Drive:
             for folder in contents
             if folder["mimeType"] == "application/vnd.google-apps.folder"
         ]
-        for subfolder in subfolders:
+        for subfolder in tqdm(subfolders, total=len(subfolders), desc="Downloading folders"):
             subpath = path / subfolder["name"]
             subpath.mkdir(parents=True, exist_ok=True)
             subcontents = self.folder_contents(subfolder["id"])
@@ -236,3 +238,12 @@ class Drive:
         # done = False
         # while done is False:
         #     pass
+
+    def sync_folder(folder_id:str, local_path: str = Path.cwd()):
+        """ Syncs a local folder with a Drive folder. This will download any new or updated files.
+        Args:
+            folder_id: ID of the folder to sync
+            local_path: Path to the local folder to sync with
+        Returns : bool
+        """
+        pass
