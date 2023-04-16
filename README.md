@@ -18,6 +18,20 @@ drive = Drive()
 ```
 
 --- 
+
+- Download a specific file
+    - Save to specific path
+        ```python 
+        drive.download_file('10HCqZH88PUr_19-A__GllqOk4srH_ikDbrwSnQhJYUw',path="/home/me/Downloads")
+        ```
+    - assign to variable Dict[name:str,suffix:str,content:binary]
+        ```python 
+        f = drive.download_file('10HCqZH88PUr_19-A__GllqOk4srH_ikDbrwSnQhJYUw')
+        ```
+    - change filename
+        ```python 
+        f = drive.download_file('10HCqZH88PUr_19-A__GllqOk4srH_ikDbrwSnQhJYUw',name='new_name')
+        ```
 - List all folders 
     ```python
     folders = drive.list_folders()
