@@ -44,6 +44,45 @@ def get_gdrive_service():
     return build("drive", "v3", credentials=creds)
 
 
+def traverse_drive_folder(service, folder_id):
+    """
+    Recursively traverses a Google Drive folder tree and yields each file's content and path.
+    
+    Args:
+        service: A Google Drive API service object authenticated with valid credentials.
+        folder_id (str): The ID of the Google Drive folder to start the traversal from.
+        
+    Yields:
+        Tuple[str, bytes]: A tuple containing the path and content of each file found in the folder structure.
+    """
+    try:
+        # Retrieve all files and subfolders from the given folder
+        results = service.files().list(q=f"'{folder_id}' in parents", fields="nextPageToken, files(id, name, mimeType)").execute()
+        items = results.get('files', [])
+
+        # Iterate over each file/folder in the current folder
+        for item in items:
+            if item['mimeType'] == 'application/vnd.google-apps.folder':
+                # Recursively traverse any subfolders
+                yield from traverse_drive_folder(service, item['id'])
+            else:
+                # Fetch the file's content and yield its path and content
+                request = service.files().get_media(fileId=item['id'])
+                content = request.execute()
+
+                path_parts = [item['name']]
+                parent_id = item['parents'][0]
+                while parent_id != folder_id:
+                    parent = service.files().get(fileId=parent_id, fields='id, name, parents').execute()
+                    path_parts.insert(0, parent['name'])
+                    parent_id = parent['parents'][0]
+                path = '/'.join(path_parts)
+
+                yield path, content
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+
+
 class Drive:
     """
     Instantiate a multiplication operation.
@@ -123,7 +162,7 @@ class Drive:
 
     def get_file_by_id(self, file_id: str) -> list:
         """Search for a file by ID"""
-        return self.service.files().get(fileId=file_id).execute()
+        return self.service.files().get(fileId=file_id, fields='id,name,mimeType,size,modifiedTime,md5Checksum').execute()
 
     def download_file(self, file_id: str, path: str = None, name: str = None) -> dict:
         """Downloads a file
@@ -246,4 +285,23 @@ class Drive:
             local_path: Path to the local folder to sync with
         Returns : bool
         """
-        pass
+        # make list of all files in local folder
+        local_files = []
+        for root, dirs, files in os.walk(local_path):
+            for file in files:
+                local_files.append(os.path.join(root, file))
+        # make list of all files in Drive folder
+        drive_files = []
+        for file in self.folder_contents(folder_id):
+            drive_files.append(file["name"])
+        # compare lists
+        
+        # download any files that are in Drive but not local
+        # update any files that are in both Drive and local but are different
+        #drive modifiedTime compare to os.path.getmtime(path), if drive is newer, download
+        # Drive 'modifiedTime': '2022-02-27T08:09:00.258Z',
+        drive_datetime = datetime.datetime.strptime(input_datetime_str, '%Y-%m-%dT%H:%M:%S.%fZ')
+        # Python 
+        local_datetime = datetime.fromtimestamp(os.path.getmtime(local_file))
+
+        # delete any files that are in local but not Drive
