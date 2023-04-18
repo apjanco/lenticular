@@ -1,6 +1,7 @@
 site_name: Lenticular
 theme:
   name: material
+  logo: assets/face-in-clouds.png
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
