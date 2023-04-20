@@ -284,6 +284,6 @@ class Drive:
             for file in files:
                 self.download_file(file["id"], path=str(subpath))
 
-        return True
+        return name
         
     
