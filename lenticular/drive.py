@@ -1,6 +1,7 @@
 import pickle
 import os
 import io
+import yaml
 from rich import print
 from pathlib import Path
 from tqdm import tqdm
@@ -15,6 +16,12 @@ from googleapiclient.http import MediaIoBaseDownload
 # Helful: https://developers.google.com/resources/api-libraries/documentation/drive/v2/python/latest/drive_v2.files.html
 
 SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
+
+# read policies 
+def read_policies():
+    with open('policies.yaml', 'r') as file:
+        policies = yaml.safe_load(file)
+    return policies
 
 
 def get_gdrive_service():
@@ -85,15 +92,13 @@ def traverse_drive_folder(service, folder_id):
 
 class Drive:
     """
-    Instantiate a multiplication operation.
-    Numbers will be multiplied by the given multiplier.
-
-    :param multiplier: The multiplier.
-    :type multiplier: int
+    Instantiate a Drive session.
+    
     """
 
     def __init__(self):
         self.service = get_gdrive_service()
+        self.policies = read_policies()
 
     def drive_request(self, q: str, recursive=False) -> list:
         """Send an API request to drive
@@ -231,18 +236,24 @@ class Drive:
     ) -> bool:
         """Downloads a folder
         Args:
-            real_file_id: ID of the file to download
-        Returns : dict with name, content and suffix | None
-        ex: Path(f["name"])
+            folder_id: ID of the folder to download
+        Returns : bool
         """
         # get folder name
         if not name:
             name = self.get_file_by_id(folder_id)["name"]
-
+        
+        # create output path
+        if self.policies and self.policies["output_path"]:
+            path = self.policies["output_path"]
+        
         if isinstance(path, str):
             path = Path(path)
+        
+        if not path.exists():
+            path.mkdir(parents=True, exist_ok=True)
 
-        # create a new directory using name
+        # create a new subdirectory using name
         path = path / name
         path.mkdir(parents=True, exist_ok=True)
 
@@ -274,34 +285,5 @@ class Drive:
                 self.download_file(file["id"], path=str(subpath))
 
         return True
-        # done = False
-        # while done is False:
-        #     pass
-
-    def sync_folder(folder_id:str, local_path: str = Path.cwd()):
-        """ Syncs a local folder with a Drive folder. This will download any new or updated files.
-        Args:
-            folder_id: ID of the folder to sync
-            local_path: Path to the local folder to sync with
-        Returns : bool
-        """
-        # make list of all files in local folder
-        local_files = []
-        for root, dirs, files in os.walk(local_path):
-            for file in files:
-                local_files.append(os.path.join(root, file))
-        # make list of all files in Drive folder
-        drive_files = []
-        for file in self.folder_contents(folder_id):
-            drive_files.append(file["name"])
-        # compare lists
         
-        # download any files that are in Drive but not local
-        # update any files that are in both Drive and local but are different
-        #drive modifiedTime compare to os.path.getmtime(path), if drive is newer, download
-        # Drive 'modifiedTime': '2022-02-27T08:09:00.258Z',
-        drive_datetime = datetime.datetime.strptime(input_datetime_str, '%Y-%m-%dT%H:%M:%S.%fZ')
-        # Python 
-        local_datetime = datetime.fromtimestamp(os.path.getmtime(local_file))
-
-        # delete any files that are in local but not Drive
+    

@@ -2,6 +2,6 @@ images:
   ocr: vision
   output_format: png
   output_size: 2000000
-output_path: /home/apjanco/projects/my_project
+output_path: /srv/projects/my_project
 project_name: That Project!
 slugify: true
