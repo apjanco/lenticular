@@ -1,8 +1,11 @@
 import typer 
 import yaml
 from pathlib import Path
+from typing import List
 from rich import print
 from .drive import Drive
+from .normalize import Filenames, Images
+
 app = typer.Typer()
 #load policies
 policies = yaml.safe_load((Path.cwd() / "policies.yaml").read_text())
@@ -10,9 +13,11 @@ policies = yaml.safe_load((Path.cwd() / "policies.yaml").read_text())
 @app.command()
 def meep():
     """
-    Shoot the portal gun
+    Meep meep!
     """
-    typer.echo("Shooting portal gun")
+    # 
+
+    typer.echo(" Meep!")
 
 @app.command()
 def download(id: str = typer.Argument(..., help="Google Drive ID")):
@@ -31,3 +36,19 @@ def download(id: str = typer.Argument(..., help="Google Drive ID")):
 The File ID can be found in the URL of the file when it is opened on Google Drive. It is the combination of letters and numbers that appear after "d/" in the link: 
 https://docs.google.com/spreadsheets/d/[bold green]1vKx1iPAplNzydYZbFEAxLknpR8S6UzjC91sAXTrpVVw[/bold green]/edit#gid=123456789
 For example, in the URL above the File ID is "1vKx1iPAplNzydYZbFEAxLknpR8S6UzjC91sAXTrpVVw""")
+
+@app.command()
+def normalize(paths:List[Path] = typer.Argument(None, help="Paths on your machine to normalize.")):
+    if not paths:
+        paths = [policies['output_path']]
+    Filenames(paths) #TODO add tag to run or not run this
+    Images(paths) #TODO add tag to run or not run this
+    print(paths)
+
+@app.command()
+def datify(path: str = typer.Argument(..., help="Transform a folder of images into a dataset.")):
+    print(path)
+
+@app.command()
+def publish(dataset_path: str = typer.Argument(..., help="Dataset to publish.")):
+    print(dataset_path)

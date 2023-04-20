@@ -6,7 +6,7 @@ import filetype
 from PIL import Image
 
 
-policies = yaml.safe_load((Path.cwd() / "lenticular"/ "policies.yaml").read_text())
+policies = yaml.safe_load((Path.cwd() / "policies.yaml").read_text())
 
 ###
 # Helper functions for image normalization
@@ -87,19 +87,14 @@ class Images:
     Load and normalize a directory of images.
 
     """
-
-    def __init__(self):
-        self.paths: list[Path] = []
+    def __init__(self, paths:list):
         self.output_path = policies["output_path"]
         self.image_output_format = policies["images"]["output_format"]
         self.image_output_size = policies["images"]["output_size"]
-        self.output_size = (0, 0)
-        self.output_mode = "RGB"
-        self.output_quality = 100
-        self.output_prefix = ""
-        self.output_suffix = ""
+        self.resize_images(paths)
 
-
-    def resize_images(self):
-        for file in self.image_paths:
-            change_size_if_needed(file, self.image_output_size, self.output_path)
+    def resize_images(self, paths:list):
+        for path in paths:
+            for file in Path(path).glob('**/*'):
+                if file.is_file():
+                    change_size_if_needed(file, self.image_output_size, self.output_path)
