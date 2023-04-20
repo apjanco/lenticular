@@ -5,7 +5,7 @@ from typing import List
 from rich import print
 from .drive import Drive
 from .normalize import Filenames, Images
-
+from .huggingface.dataset import create_dataset
 app = typer.Typer()
 #load policies
 policies = yaml.safe_load((Path.cwd() / "policies.yaml").read_text())
@@ -46,8 +46,10 @@ def normalize(paths:List[Path] = typer.Argument(None, help="Paths on your machin
     print(paths)
 
 @app.command()
-def datify(path: str = typer.Argument(..., help="Transform a folder of images into a dataset.")):
-    print(path)
+def dataset(path: Path = typer.Argument(None, help="Transform a folder of images into a dataset."), dataset_name: str = typer.Option('dataset', help="Name of the dataset to create.")):
+    if not path:
+        path = Path(policies['output_path'])
+    create_dataset(path, dataset_name)
 
 @app.command()
 def publish(dataset_path: str = typer.Argument(..., help="Dataset to publish.")):

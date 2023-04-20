@@ -8,6 +8,7 @@ def gen(file_path:Path):
     
 
 def create_dataset(file_path:Path, dataset_name:str = 'dataset'):
-    ds = Dataset.from_generator(gen(file_path))
+    a = gen(file_path)
+    ds = Dataset.from_generator(a)
     ds.save_to_disk(dataset_name)
     return ds
