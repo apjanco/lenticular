@@ -1,11 +1,7 @@
-project_name: My Project
-output_path: ./my_project
-
-#File names 
-slugify: true
-
-# Images 
 images:
+  ocr: vision
   output_format: png
-  output_size: 2000000 #2MB
-  ocr: 'vision' #or tesseract
+  output_size: 2000000
+output_path: /home/apjanco/projects/my_project
+project_name: That Project!
+slugify: true
