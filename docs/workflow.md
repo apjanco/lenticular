@@ -6,6 +6,7 @@
 ```mermaid
 flowchart TB
     a("Google Drive") --> b("Normalization")
+    e("Box")-. todo .-> b("Normalization")
     b("Normalization") --> c("datasets")
     c("datasets") --> d("HuggingFace Hub")
 ```
@@ -38,8 +39,7 @@ flowchart TB
 ## Export 
 ```mermaid
 flowchart LR
-    a("DO Spaces") --> b("11ty build")
-    c("HF Hub") --> b("11ty build")
+    a("HF Hub") --> b("11ty build")
     b --> d("site")
 ```
 [@hugginface/hub](https://huggingface.co/docs/huggingface.js/index)
