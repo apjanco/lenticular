@@ -1,0 +1,11 @@
+project_name: My Project
+output_path: ./my_project
+
+#File names 
+slugify: true
+
+# Images 
+images:
+  output_format: png
+  output_size: 2000000 #2MB
+  ocr: 'vision' #or tesseract
