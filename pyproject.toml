@@ -16,6 +16,7 @@ google-auth-oauthlib = "^1.0.0"
 rich = "^13.3.4"
 typer = "^0.7.0"
 datasets = {extras = ["vision"], version = "^2.11.0"}
+huggingface-hub = "^0.13.4"
 
 [tool.poetry.scripts]
 lenticular = "lenticular.cli:app"
