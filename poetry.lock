@@ -169,6 +169,14 @@ docs = ["furo (>=2023.3.27)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sph
 testing = ["covdefaults (>=2.3)", "coverage (>=7.2.3)", "diff-cover (>=7.5)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)", "pytest (>=7.3.1)"]
 
 [[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "frozenlist"
 version = "1.3.3"
 description = "A list-like structure which implements collections.abc.MutableSequence"
@@ -952,7 +960,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "060db5dacd41dff1beb9237f5b80955a31364d34d525b6482ec140d2ebf7db44"
+content-hash = "d4693cffd6e914a6fecfa58659ccba5f0141f12db0799d228ba4b4be0e1a772b"
 
 [metadata.files]
 aiohttp = []
@@ -971,6 +979,7 @@ colorama = []
 datasets = []
 dill = []
 filelock = []
+filetype = []
 frozenlist = []
 fsspec = []
 ghp-import = []
