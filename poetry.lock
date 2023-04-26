@@ -62,6 +62,28 @@ tests-no-zope = ["hypothesis", "pympler", "pytest (>=4.3.0)", "pytest-xdist", "c
 tests_no_zope = ["hypothesis", "pympler", "pytest (>=4.3.0)", "pytest-xdist", "cloudpickle", "mypy (>=0.971,<0.990)", "pytest-mypy-plugins"]
 
 [[package]]
+name = "boxsdk"
+version = "3.7.1"
+description = "Official Box Python SDK"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+attrs = ">=17.3.0"
+python-dateutil = "*"
+requests = ">=2.4.3"
+requests-toolbelt = ">=0.4.0,<1.0.0"
+
+[package.extras]
+coveralls = ["coveralls", "tox"]
+dev = ["tox"]
+gh = ["tox-gh-actions", "tox"]
+jwt = ["pyjwt (>=1.7.0)", "cryptography (>=3)"]
+redis = ["redis (>=2.10.3)"]
+test = ["bottle", "jsonpatch (>1.14)", "sqlalchemy (<1.4.0)", "pytest", "pytest-timeout", "pytest-cov", "pytest-lazy-fixture", "pytz"]
+
+[[package]]
 name = "cachetools"
 version = "5.3.0"
 description = "Extensible memoizing collections and decorators"
@@ -799,6 +821,17 @@ requests = ">=2.0.0"
 rsa = ["oauthlib[signedtoken] (>=3.0.0)"]
 
 [[package]]
+name = "requests-toolbelt"
+version = "0.10.1"
+description = "A utility belt for advanced users of python-requests"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[package.dependencies]
+requests = ">=2.0.1,<3.0.0"
+
+[[package]]
 name = "responses"
 version = "0.18.0"
 description = "A utility library for mocking out the `requests` Python library."
@@ -960,7 +993,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "d4693cffd6e914a6fecfa58659ccba5f0141f12db0799d228ba4b4be0e1a772b"
+content-hash = "7e106b3b5685029533970af0736e7410650938f1aa6e77617129ca9fd4bdaa75"
 
 [metadata.files]
 aiohttp = []
@@ -968,6 +1001,7 @@ aiosignal = []
 async-timeout = []
 atomicwrites = []
 attrs = []
+boxsdk = []
 cachetools = []
 certifi = []
 charset-normalizer = []
@@ -1038,6 +1072,7 @@ pyyaml-env-tag = []
 regex = []
 requests = []
 requests-oauthlib = []
+requests-toolbelt = []
 responses = []
 rich = []
 rsa = []
