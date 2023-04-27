@@ -1,4 +1,12 @@
 [[package]]
+name = "aiofiles"
+version = "23.1.0"
+description = "File support for asyncio."
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[[package]]
 name = "aiohttp"
 version = "3.8.4"
 description = "Async http client/server framework (asyncio)"
@@ -36,6 +44,14 @@ description = "Timeout context manager for asyncio programs"
 category = "main"
 optional = false
 python-versions = ">=3.6"
+
+[[package]]
+name = "asyncio"
+version = "3.4.3"
+description = "reference implementation of PEP 3156"
+category = "main"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "atomicwrites"
@@ -993,12 +1009,14 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "7e106b3b5685029533970af0736e7410650938f1aa6e77617129ca9fd4bdaa75"
+content-hash = "9b318a30d46770cff354c99d8e57cbae8de81087c3e37028ee44674b20526a08"
 
 [metadata.files]
+aiofiles = []
 aiohttp = []
 aiosignal = []
 async-timeout = []
+asyncio = []
 atomicwrites = []
 attrs = []
 boxsdk = []
