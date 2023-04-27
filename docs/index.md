@@ -11,26 +11,33 @@ $ pip install lenticular
 
 For Drive, generate a `credentials.json` file using [these instructions.]( https://developers.google.com/drive/api/quickstart/python) 
 
-# Usage
+# Basic Usage
 
-```python 
-from lenticular.drive import Drive 
+1. [Set API keys for Drive and/or Box](./secrets)
 
-drive = Drive() 
-```
+2. [Create a project and set the file policies](./policies).
 
---- 
+3. Then for Google Drive
 
-- Download a file
     ```python 
-    f = drive.download_file('10HCqZH88PUr_19-A__GllqOk4srH_ikDbrwSnQhJYUw')
-    ```
-    
-- Download a folder, (all files and subfolders)
-    ```python 
+    from lenticular.drive import Drive 
+
+    drive = Drive() 
+
     drive.download_folder('1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G')
     ```
 
+    > more on [Drive](./drive)
 
-Links:
-https://docs.iterative.ai/PyDrive2/
+4. Or for Box 
+
+    ```python 
+    from lenticular.box import Box
+
+    client = Box() 
+
+    client.download_folder('160107962928')
+    ```
+
+    > more on [Box](./box)
+
