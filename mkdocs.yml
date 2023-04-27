@@ -2,6 +2,38 @@ site_name: Lenticular
 theme:
   name: material
   logo: assets/face-in-clouds.png
+  font:
+    text: JetBrains Mono
+  features:
+    - content.code.copy
+    - navigation.sections
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: light-blue
+      accent: violet
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: light-blue
+      accent: violet
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+
+nav:
+- Get Started: index.md
+- Workflow: workflow.md
+- Command Line Interface: cli.md
+- Secrets: secrets.md
+- Policies: policies.md
+- Drive: drive.md
+- Box: box.md
+- Normalization: normalization.md
+- Datasets: datasets.md
+
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:

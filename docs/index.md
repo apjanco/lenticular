@@ -1,15 +1,11 @@
-# Get Started
-Fetch files from the cloud
-
-We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to continue using familiar technologies to manage their data, while developers can fetch or sync data for projects. 
+We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to use familiar technologies to manage their data, while developers can fetch and normalize data for projects. 
 
 # Installation
 
 ```
-$ pip install lenticular
+pip install lenticular
 ```
 
-For Drive, generate a `credentials.json` file using [these instructions.]( https://developers.google.com/drive/api/quickstart/python) 
 
 # Basic Usage
 
@@ -17,8 +13,10 @@ For Drive, generate a `credentials.json` file using [these instructions.]( https
 
 2. [Create a project and set the file policies](./policies).
 
-3. Then for Google Drive
+3. Google Drive  
 
+    `$ lenticular drive-download 1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G`  
+    or
     ```python 
     from lenticular.drive import Drive 
 
@@ -29,8 +27,10 @@ For Drive, generate a `credentials.json` file using [these instructions.]( https
 
     > more on [Drive](./drive)
 
-4. Or for Box 
+4. Box 
 
+    `$ lenticular box-download 160107962928`  
+    or
     ```python 
     from lenticular.box import Box
 
