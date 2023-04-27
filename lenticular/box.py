@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 import boxsdk
 from boxsdk import Client, OAuth2
-from tqdm import tqdm 
+import tqdm.asyncio
 import asyncio
 import aiofiles
 import aiohttp
@@ -59,14 +59,13 @@ class Box:
             if not output_path.endswith('/'):
                 output_path = output_path + '/'
         contents = self.folder_contents(folder_id)
+        
         # Get all folders and create them if they don't exist
         folders = set([i["path"] for i in contents])
         for folder in folders:
             save_path = Path(output_path + folder)
             if not save_path.exists():
                 save_path.mkdir(parents=True)
-
-        folder_files = [item for item in tqdm(contents)]
         
         async def fetch_file(item:dict):
             #https://gist.github.com/darwing1210/c9ff8e3af8ba832e38e6e6e347d9047a
@@ -74,17 +73,17 @@ class Box:
             async with sema, aiohttp.ClientSession() as session:
                 async with session.get(item["download_url"]) as resp:
                     assert resp.status == 200
-                    print(resp)
                     data = await resp.read()
 
             async with aiofiles.open(
                 os.path.join(output_path, item["path"], item["name"]), "wb"
             ) as outfile:
                 await outfile.write(data)
-
+        #TODO add progress bar
         loop = asyncio.get_event_loop()
-        tasks = [loop.create_task(fetch_file(f)) for f in folder_files]
+        tasks = [loop.create_task(fetch_file(f)) for f in contents]
         loop.run_until_complete(asyncio.wait(tasks))
+        loop.close()
         
             
     
