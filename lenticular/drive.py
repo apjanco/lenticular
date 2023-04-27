@@ -17,9 +17,10 @@ from googleapiclient.http import MediaIoBaseDownload
 
 SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
 
-# read policies 
+
+# read policies
 def read_policies():
-    with open('policies.yaml', 'r') as file:
+    with open("./lenticular/policies.yaml", "r") as file:
         policies = yaml.safe_load(file)
     return policies
 
@@ -29,7 +30,7 @@ def get_gdrive_service():
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if not os.path.exists("credentials.json"):
+    if not os.path.exists("./lenticular/credentials.json"):
         print(
             "🚩 [bold red]No credentials.json file found.[/bold red]\n Please follow the instructions here:https://developers.google.com/drive/api/quickstart/python"
         )
@@ -42,7 +43,9 @@ def get_gdrive_service():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(
+                "./lenticular/credentials.json", SCOPES
+            )
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open("token.pickle", "wb") as token:
@@ -54,36 +57,47 @@ def get_gdrive_service():
 def traverse_drive_folder(service, folder_id):
     """
     Recursively traverses a Google Drive folder tree and yields each file's content and path.
-    
+
     Args:
         service: A Google Drive API service object authenticated with valid credentials.
         folder_id (str): The ID of the Google Drive folder to start the traversal from.
-        
+
     Yields:
         Tuple[str, bytes]: A tuple containing the path and content of each file found in the folder structure.
     """
     try:
         # Retrieve all files and subfolders from the given folder
-        results = service.files().list(q=f"'{folder_id}' in parents", fields="nextPageToken, files(id, name, mimeType)").execute()
-        items = results.get('files', [])
+        results = (
+            service.files()
+            .list(
+                q=f"'{folder_id}' in parents",
+                fields="nextPageToken, files(id, name, mimeType)",
+            )
+            .execute()
+        )
+        items = results.get("files", [])
 
         # Iterate over each file/folder in the current folder
         for item in items:
-            if item['mimeType'] == 'application/vnd.google-apps.folder':
+            if item["mimeType"] == "application/vnd.google-apps.folder":
                 # Recursively traverse any subfolders
-                yield from traverse_drive_folder(service, item['id'])
+                yield from traverse_drive_folder(service, item["id"])
             else:
                 # Fetch the file's content and yield its path and content
-                request = service.files().get_media(fileId=item['id'])
+                request = service.files().get_media(fileId=item["id"])
                 content = request.execute()
 
-                path_parts = [item['name']]
-                parent_id = item['parents'][0]
+                path_parts = [item["name"]]
+                parent_id = item["parents"][0]
                 while parent_id != folder_id:
-                    parent = service.files().get(fileId=parent_id, fields='id, name, parents').execute()
-                    path_parts.insert(0, parent['name'])
-                    parent_id = parent['parents'][0]
-                path = '/'.join(path_parts)
+                    parent = (
+                        service.files()
+                        .get(fileId=parent_id, fields="id, name, parents")
+                        .execute()
+                    )
+                    path_parts.insert(0, parent["name"])
+                    parent_id = parent["parents"][0]
+                path = "/".join(path_parts)
 
                 yield path, content
     except HttpError as error:
@@ -93,7 +107,7 @@ def traverse_drive_folder(service, folder_id):
 class Drive:
     """
     Instantiate a Drive session.
-    
+
     """
 
     def __init__(self):
@@ -167,7 +181,13 @@ class Drive:
 
     def get_file_by_id(self, file_id: str) -> list:
         """Search for a file by ID"""
-        return self.service.files().get(fileId=file_id, fields='id,name,mimeType,size,modifiedTime,md5Checksum').execute()
+        return (
+            self.service.files()
+            .get(
+                fileId=file_id, fields="id,name,mimeType,size,modifiedTime,md5Checksum"
+            )
+            .execute()
+        )
 
     def download_file(self, file_id: str, path: str = None, name: str = None) -> dict:
         """Downloads a file
@@ -175,6 +195,7 @@ class Drive:
             real_file_id: ID of the file to download
         Returns : dict with name, content and suffix | None
         ex: Path(f["name"]).with_suffix(f["suffix"]).write_bytes(f["content"])
+        #TODO make async
         """
         file_data = self.get_file_by_id(file_id)
         kind = file_data.get("kind")
@@ -242,14 +263,14 @@ class Drive:
         # get folder name
         if not name:
             name = self.get_file_by_id(folder_id)["name"]
-        
+
         # create output path
         if self.policies and self.policies["output_path"]:
             path = self.policies["output_path"]
-        
+
         if isinstance(path, str):
             path = Path(path)
-        
+
         if not path.exists():
             path.mkdir(parents=True, exist_ok=True)
 
@@ -272,7 +293,7 @@ class Drive:
             for folder in contents
             if folder["mimeType"] == "application/vnd.google-apps.folder"
         ]
-        for subfolder in tqdm(subfolders, total=len(subfolders), desc="Downloading folders"):
+        for subfolder in subfolders:
             subpath = path / subfolder["name"]
             subpath.mkdir(parents=True, exist_ok=True)
             subcontents = self.folder_contents(subfolder["id"])
@@ -285,5 +306,3 @@ class Drive:
                 self.download_file(file["id"], path=str(subpath))
 
         return name
-        
-    
