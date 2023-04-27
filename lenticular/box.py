@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 import boxsdk
 from boxsdk import Client, OAuth2
-import tqdm.asyncio
+from tqdm import tqdm
 import asyncio
 import aiofiles
 import aiohttp
@@ -78,10 +78,12 @@ class Box:
             async with aiofiles.open(
                 os.path.join(output_path, item["path"], item["name"]), "wb"
             ) as outfile:
+                pbar.update(1)
                 await outfile.write(data)
         #TODO add progress bar
         loop = asyncio.get_event_loop()
         tasks = [loop.create_task(fetch_file(f)) for f in contents]
+        pbar = tqdm(total=len(contents), desc='Downloading files')
         loop.run_until_complete(asyncio.wait(tasks))
         loop.close()
         
