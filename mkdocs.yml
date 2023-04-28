@@ -3,24 +3,24 @@ theme:
   name: material
   logo: assets/face-in-clouds.png
   font:
-    text: JetBrains Mono
+    text: Inter
   features:
     - content.code.copy
     - navigation.sections
   palette:
     - media: '(prefers-color-scheme: light)'
       scheme: default
-      primary: light-blue
+      primary: dark-purple
       accent: violet
       toggle:
-        icon: material/lightbulb
+        icon: material/clouds
         name: Switch to light mode
     - media: '(prefers-color-scheme: dark)'
       scheme: slate
-      primary: light-blue
+      primary: dark-purple
       accent: violet
       toggle:
-        icon: material/lightbulb-outline
+        icon: material/clouds
         name: Switch to dark mode
 
 nav:
