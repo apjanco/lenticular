@@ -7,7 +7,8 @@ from .drive import Drive
 from .box import Box
 from .normalize import Filenames, Images
 from .huggingface.dataset import create_dataset
-
+from .set_policies import update_policies
+from .set_secrets import set_secrets
 app = typer.Typer()
 # load policies
 policies = yaml.safe_load((Path.cwd() / "lenticular" / "policies.yaml").read_text())
@@ -51,6 +52,19 @@ https://docs.google.com/spreadsheets/d/[bold green]1vKx1iPAplNzydYZbFEAxLknpR8S6
 For example, in the URL above the File ID is "1vKx1iPAplNzydYZbFEAxLknpR8S6UzjC91sAXTrpVVw"""
         )
 
+@app.command()
+def policies():
+    "Update current policies."
+    config = update_policies()
+    if config:
+        print("🤩 Policies updated!")
+
+@app.command()
+def secrets():
+    "Update current secret settings."
+    config = set_secrets()
+    if config:
+        print("🤩 Secrets updated!")
 
 @app.command()
 def box_download(id: str = typer.Argument(..., help="Box ID")):

@@ -6,7 +6,7 @@
 ```mermaid
 flowchart TB
     a("Google Drive") --> b("Normalization")
-    e("Box")-. todo .-> b("Normalization")
+    e("Box")--> b("Normalization")
     b("Normalization") --> c("datasets")
     c("datasets") --> d("HuggingFace Hub")
 ```
@@ -16,12 +16,12 @@ flowchart TB
     <b>Download</b>
     <ul><li>Configure project, update settings.yml</li>
     <li>Download all Drive folders and files to local folders</li></ul>
-    <b>Normalization</b>
+    <b>Normalize</b>
     <ul><li>Complete normalization of filenames</li> 
     <li>Complete normalization of file types</li>
     <li>Re-size large files, optimize for web</li>
     <li>Clean spreadsheets with openrefine</li> </ul>
-    <b>Datafication</b>
+    <b>Datafy</b>
     <ul><li>Create dataset</li> 
     <li>Create a metadata record for each file</li> 
     <li>Populate with OCRd text, labels and other metadata</li>

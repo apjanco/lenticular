@@ -4,7 +4,7 @@ import yaml
 
 def update_policies():
     # Load YAML file
-    with open("policies.yaml", "r") as file:
+    with open("./lenticular/policies.yaml", "r") as file:
         config = yaml.safe_load(file)
 
     # Prompt user for input for each key
@@ -39,9 +39,6 @@ def update_policies():
                     except OSError:
                         print(f"Creation of the directory {config[key]} failed")
     # Save updated values back to YAML file
-    with open("policies.yaml", "w") as file:
+    with open("./lenticular/policies.yaml", "w") as file:
         yaml.dump(config, file)
-
-
-if __name__ == "__main__":
-    update_policies()
+    return config

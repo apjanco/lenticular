@@ -3,5 +3,5 @@ images:
   output_format: png
   output_size: 2000000
 output_path: /srv/projects/my_project
-project_name: That Project!
+project_name: This Project
 slugify: true

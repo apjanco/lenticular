@@ -1,6 +1,7 @@
 credentials.json
 token.pickle
 lenticular/credentials.json
+lenticular/secrets.json
 lenticular/token.pickle
 # Byte-compiled / optimized / DLL files
 __pycache__/

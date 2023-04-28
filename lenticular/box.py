@@ -9,6 +9,7 @@ import asyncio
 import aiofiles
 import aiohttp
 from rich import print
+import srsly
 
 # Go to
 # https://developer.box.com/guides/cli/quick-start//
@@ -23,9 +24,16 @@ def read_policies():
 
 
 def get_box_client():
-    BOX_CLIENT_ID = os.environ.get("BOX_CLIENT_ID")
-    BOX_CLIENT_SECRET = os.environ.get("BOX_CLIENT_SECRET")
-    BOX_DEVELOPER_TOKEN = os.environ.get("BOX_DEVELOPER_TOKEN")
+    secrets = srsly.read_json("./lenticular/secrets.json")
+    if not secrets:
+        print(
+            "🚩 [bold red]No secrets.json file found.[/bold red]\n"
+            "Please run [bold green]lenticular secrets[/bold green] to set your Box credentials."
+        )
+        return
+    BOX_CLIENT_ID = secrets.get("BOX_CLIENT_ID", None)
+    BOX_CLIENT_SECRET = secrets.get("BOX_CLIENT_SECRET", None)
+    BOX_DEVELOPER_TOKEN = secrets.get("BOX_DEVELOPER_TOKEN", None)
     if BOX_CLIENT_ID and BOX_CLIENT_SECRET and BOX_DEVELOPER_TOKEN:
         auth = OAuth2(
             client_id=BOX_CLIENT_ID,
