@@ -35,8 +35,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -52,12 +52,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="dark-purple" data-md-color-accent="violet">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -65,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lenticular" class="md-skip">
+        <a href="#installation" class="md-skip">
           Skip to content
         </a>
       
@@ -83,8 +87,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="Lenticular" class="md-header__button md-logo" aria-label="Lenticular" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="assets/face-in-clouds.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -100,12 +103,32 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              😶‍🌫️ lenticular
+              Get Started
             
           </span>
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="dark-purple" data-md-color-accent="violet"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.19 12.07c.5-.53.81-1.25.81-2.07 0-1.7-1.3-3.16-3-3.16h-2.8C14.2 4.17 12.03 2 9.36 2c-2.05 0-3.8 1.28-4.51 3.08A3.967 3.967 0 0 0 1 9.04 3.97 3.97 0 0 0 4.96 13H8.1c-.06.33-.1.66-.1 1h-.5C5.57 14 4 15.57 4 17.5S5.57 21 7.5 21h11c2.5 0 4.5-2 4.5-4.5 0-2.24-1.66-4.09-3.81-4.43M18.5 19h-11c-.83 0-1.5-.67-1.5-1.5S6.67 16 7.5 16H10v-2c0-1.93 1.57-3.5 3.5-3.5S17 12.07 17 14h1.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="dark-purple" data-md-color-accent="violet"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.19 12.07c.5-.53.81-1.25.81-2.07 0-1.7-1.3-3.16-3-3.16h-2.8C14.2 4.17 12.03 2 9.36 2c-2.05 0-3.8 1.28-4.51 3.08A3.967 3.967 0 0 0 1 9.04 3.97 3.97 0 0 0 4.96 13H8.1c-.06.33-.1.66-.1 1h-.5C5.57 14 4 15.57 4 17.5S5.57 21 7.5 21h11c2.5 0 4.5-2 4.5-4.5 0-2.24-1.66-4.09-3.81-4.43M18.5 19h-11c-.83 0-1.5-.67-1.5-1.5S6.67 16 7.5 16H10v-2c0-1.93 1.57-3.5 3.5-3.5S17 12.07 17 14h1.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -169,8 +192,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="Lenticular" class="md-nav__button md-logo" aria-label="Lenticular" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="assets/face-in-clouds.png" alt="logo">
 
     </a>
     Lenticular
@@ -196,7 +218,7 @@
       
       
       <a href="." class="md-nav__link md-nav__link--active">
-        😶‍🌫️ lenticular
+        Get Started
       </a>
       
     </li>
@@ -213,6 +235,96 @@
     <li class="md-nav__item">
       <a href="workflow/" class="md-nav__link">
         Workflow
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="secrets/" class="md-nav__link">
+        Secrets
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="policies/" class="md-nav__link">
+        Policies
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="drive/" class="md-nav__link">
+        Drive
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="box/" class="md-nav__link">
+        Box
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="normalization/" class="md-nav__link">
+        Normalization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datasets/" class="md-nav__link">
+        Datasets
       </a>
     </li>
   
@@ -251,51 +363,46 @@
                   
 
 
-<h1 id="lenticular">😶‍🌫️ lenticular</h1>
-<p>Fetch files from the cloud</p>
-<p>We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to continue using familiar technologies to manage their data, while developers can fetch or sync data for projects. </p>
+<p>We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to use familiar technologies to manage their data, while developers can fetch and normalize data for projects. </p>
 <h1 id="installation">Installation</h1>
-<div class="highlight"><pre><span></span><code>$ pip install lenticular
+<div class="highlight"><pre><span></span><code>pip install lenticular
 </code></pre></div>
-<p>For Drive, generate a <code>credentials.json</code> file using <a href="https://developers.google.com/drive/api/quickstart/python">these instructions.</a> </p>
-<h1 id="usage">Usage</h1>
+<h1 id="basic-usage">Basic Usage</h1>
+<ol>
+<li>
+<p><a href="./secrets">Set API keys for Drive and/or Box</a></p>
+</li>
+<li>
+<p><a href="./policies">Create a project and set the file policies</a>.</p>
+</li>
+<li>
+<p>Google Drive  </p>
+<p><code>$ lenticular drive-download 1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G</code><br />
+or
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lenticular.drive</span> <span class="kn">import</span> <span class="n">Drive</span> 
 
 <span class="n">drive</span> <span class="o">=</span> <span class="n">Drive</span><span class="p">()</span> 
-</code></pre></div>
-<hr />
-<ul>
-<li>
-<p>Download a file
-    <div class="highlight"><pre><span></span><code><span class="n">f</span> <span class="o">=</span> <span class="n">drive</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;10HCqZH88PUr_19-A__GllqOk4srH_ikDbrwSnQhJYUw&#39;</span><span class="p">)</span>
+
+<span class="n">drive</span><span class="o">.</span><span class="n">download_folder</span><span class="p">(</span><span class="s1">&#39;1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G&#39;</span><span class="p">)</span>
 </code></pre></div></p>
+<blockquote>
+<p>more on <a href="./drive">Drive</a></p>
+</blockquote>
 </li>
 <li>
-<p>Download a folder, (all files and subfolders)
-    <div class="highlight"><pre><span></span><code><span class="n">drive</span><span class="o">.</span><span class="n">download_folder</span><span class="p">(</span><span class="s1">&#39;1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G&#39;</span><span class="p">)</span>
+<p>Box </p>
+<p><code>$ lenticular box-download 160107962928</code><br />
+or
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lenticular.box</span> <span class="kn">import</span> <span class="n">Box</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Box</span><span class="p">()</span> 
+
+<span class="n">client</span><span class="o">.</span><span class="n">download_folder</span><span class="p">(</span><span class="s1">&#39;160107962928&#39;</span><span class="p">)</span>
 </code></pre></div></p>
+<blockquote>
+<p>more on <a href="./box">Box</a></p>
+</blockquote>
 </li>
-</ul>
-<p>Links:
-https://docs.iterative.ai/PyDrive2/</p>
-<p>I am not sure that I should add sync. 
-1. No sync. We fetch all project assets.
-- we then manage them in a new enviornment
-- partners need to learn this new enviornment 
-- we are able to clean and process materials, save them to a proper dataset </p>
-<ol>
-<li>Sync. We fetch and update from the cloud</li>
-<li>partners maintain in familiar env</li>
-<li>
-<p>we'd need to clean and process materials in the cloud</p>
-</li>
-<li>
-<p>Two sets. We fetch from the cloud, clean, then push cleaned new version back to cloud, run sync on new version.</p>
-</li>
-<li>presumes need to track updates (how often will it change?)</li>
-<li>partners maintain in familiar env</li>
-<li>we don't have to pay for storage (new version acts as data store)</li>
-<li>people will continue to add stuff, and they'll add it where they know</li>
 </ol>
 
 
@@ -334,7 +441,7 @@ https://docs.iterative.ai/PyDrive2/</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.sections"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="assets/javascripts/bundle.51198bba.min.js"></script>

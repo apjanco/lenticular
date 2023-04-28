@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../policies/">
       
       
-        <link rel="next" href="../secrets/">
+        <link rel="next" href="../box/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
-        <title>Workflow - Lenticular</title>
+        <title>Drive - Lenticular</title>
       
     
     
@@ -70,11 +70,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#workflow" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -105,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Workflow
+              Drive
             
           </span>
         </div>
@@ -223,59 +218,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Workflow
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../workflow/" class="md-nav__link">
         Workflow
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#import" class="md-nav__link">
-    Import
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#export" class="md-nav__link">
-    Export
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -316,11 +263,19 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../drive/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Drive
       </a>
+      
     </li>
   
 
@@ -387,30 +342,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#import" class="md-nav__link">
-    Import
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#export" class="md-nav__link">
-    Export
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -425,77 +356,9 @@
                   
 
 
-<h1 id="workflow">Workflow</h1>
-<h2 id="import">Import</h2>
-<div style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;">
-    <div style="display: inline-block;">
-<pre class="mermaid"><code>flowchart TB
-    a("Google Drive") --&gt; b("Normalization")
-    e("Box")--&gt; b("Normalization")
-    b("Normalization") --&gt; c("datasets")
-    c("datasets") --&gt; d("HuggingFace Hub")</code></pre>
-    </div>
+  <h1>Drive</h1>
 
-    <div style="display: inline-block;">
-    <b>Download</b>
-    <ul><li>Configure project, update settings.yml</li>
-    <li>Download all Drive folders and files to local folders</li></ul>
-    <b>Normalize</b>
-    <ul><li>Complete normalization of filenames</li> 
-    <li>Complete normalization of file types</li>
-    <li>Re-size large files, optimize for web</li>
-    <li>Clean spreadsheets with openrefine</li> </ul>
-    <b>Datafy</b>
-    <ul><li>Create dataset</li> 
-    <li>Create a metadata record for each file</li> 
-    <li>Populate with OCRd text, labels and other metadata</li>
-    <li>Evaluate license and copyright</li> 
-    <b>Deploy</b>
-    <ul><li>Push dataset to Huggingface Hub</li></ul>
-
-
-
-    </div>
-</div>
-
-<hr>
-
-<h2 id="export">Export</h2>
-<p><pre class="mermaid"><code>flowchart LR
-    a("HF Hub") --&gt; b("11ty build")
-    b --&gt; d("site")</code></pre>
-<a href="https://huggingface.co/docs/huggingface.js/index">@hugginface/hub</a></p>
-<p>Requirements </p>
-<p>Partner shares materials from Drive 
-Partners can edit and update data in Drive
-We should work with partners to normalize data (either in Drive or after download?)
-- partners clean and check by hand
-- we can clean and check automatically (change filenames)</p>
-<p>I am not sure that I should add sync. 
-1. No sync. We fetch all project assets.
-- we then manage them in a new enviornment
-- partners need to learn this new enviornment 
-- we are able to clean and process materials, save them to a proper dataset </p>
-<ol>
-<li>Sync. We fetch and update from the cloud</li>
-<li>partners maintain in familiar env</li>
-<li>
-<p>we'd need to clean and process materials in the cloud</p>
-</li>
-<li>
-<p>Two sets. We fetch from the cloud, clean, then push cleaned new version back to cloud, run sync on new version.</p>
-</li>
-<li>presumes need to track updates (how often will it change?)</li>
-<li>partners maintain in familiar env</li>
-<li>we don't have to pay for storage (new version acts as data store)</li>
-<li>people will continue to add stuff, and they'll add it where they know</li>
-</ol>
-<p>HF Hub
-- supports data publication
-- versioning 
-- documentation 
-- uses git to differing copies 
-- advantages of managed cloud db w/o cost</p>
+<p>Instructions on the Drive side of the house</p>
 
 
 
