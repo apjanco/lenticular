@@ -6,6 +6,16 @@ We often work with partners who have materials stored in cloud services like Goo
 pip install lenticular
 ```
 
+```
+git clone https://github.com/apjanco/lenticular.git
+
+cd lenticular
+
+# If you need to install Poetry
+curl -sSL https://install.python-poetry.org | python3 -
+
+poetry install
+```
 
 # Basic Usage
 
