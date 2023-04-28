@@ -5,10 +5,10 @@
     <div style="display: inline-block;">
 ```mermaid
 flowchart TB
-    a("Google Drive") --> b("Normalization")
-    e("Box")--> b("Normalization")
-    b("Normalization") --> c("datasets")
-    c("datasets") --> d("HuggingFace Hub")
+    a("Google Drive") --> b("Lenticular")
+    e("Box")--> b("Lenticular")
+    b("Lenticular") --> c("HuggingFace Hub")
+    b("Lenticular") --> d("Digital Ocean Spaces")
 ```
     </div>
 
