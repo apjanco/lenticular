@@ -26,7 +26,6 @@ theme:
 nav:
 - Get Started: index.md
 - Workflow: workflow.md
-- Command Line Interface: cli.md
 - Secrets: secrets.md
 - Policies: policies.md
 - Drive: drive.md

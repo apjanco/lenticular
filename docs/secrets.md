@@ -1,10 +1,12 @@
 # Secrets
 
-To access Drive and/or Box, you will need credentials to prove that you have permission to access files on those services. I'll refer to these as secrets.  You will need to go into Box and Drive to gain the necessary credentials.  Once you have them, you can add them to lenticular's settings with this command:  
-
 ```
 $ lenticular secrets
 ```
+
+To access Drive and/or Box, you will need credentials to prove that you have permission to access files on those services. I'll refer to these as secrets.  You will need to go into Box and Drive to gain the necessary credentials.  Once you have them, you can add them to lenticular's settings with this command:  
+
+
 
 This command will prompt you to enter several values and will check for a `credentials.json` file which is required to access Drive. 
 
