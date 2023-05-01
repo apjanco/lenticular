@@ -11,6 +11,7 @@ def set_secrets():
             "BOX_CLIENT_ID": None,
             "BOX_CLIENT_SECRET": None,
             "BOX_DEVELOPER_TOKEN": None,
+            "GOOGLE_API_KEY": None,
         }
     else:
         secrets = srsly.read_json("./lenticular/secrets.json")

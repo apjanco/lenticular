@@ -14,8 +14,8 @@ def image_to_byte_array(image: Image) -> bytes:
   return imgByteArr
 
 def jpeg_to_data(path:str, language:str, type_:str = 'DOCUMENT_TEXT_DETECTION'):
-    policies = srsly.read_yaml("./lenticular/policies.yaml")
-    APIKEY = policies.get("google_api_key", None)
+    secrets = srsly.read_yaml("./lenticular/secrets.yaml")
+    APIKEY = secrets.get("GOOGLE_API_KEY", None)
     if APIKEY:
         image = Image.open(path)
         image_content = base64.b64encode(image_to_byte_array(image))

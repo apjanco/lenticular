@@ -5,3 +5,4 @@ images:
 output_path: /srv/projects/my_project
 project_name: This Project
 slugify: true
+languages: ['en', 'fr']
