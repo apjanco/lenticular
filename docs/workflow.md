@@ -49,3 +49,36 @@ HF Hub
 - documentation 
 - uses git to differing copies 
 - advantages of managed cloud db w/o cost
+
+
+## Example process 
+
+Download from Drive 
+```bash
+lenticular drive-download 1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G
+```
+
+Download from Box
+```bash
+lenticular box-download 173302952002
+```
+
+Normalize files
+```bash
+lenticular normalize
+```
+Create or update a dataset from files
+```bash
+lenticular dataset
+```
+
+Add OCR text using Vision
+```bash
+lenticular 
+```
+
+Push the files and metadata to Huggingface Hub
+```bash
+lenticular 
+```
+

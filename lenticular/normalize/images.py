@@ -3,6 +3,7 @@ import yaml
 from typing import Optional
 import os
 import filetype
+import srsly
 from PIL import Image
 
 
@@ -93,9 +94,10 @@ class Images:
     """
 
     def __init__(self, paths: list):
-        self.output_path = policies["output_path"]
-        self.image_output_format = policies["images"]["output_format"]
-        self.image_output_size = policies["images"]["output_size"]
+        self.policies = srsly.read_yaml("./lenticular/policies.yaml")
+        self.output_path = self.policies["output_path"]
+        self.image_output_format = self.policies["images"]["output_format"]
+        self.image_output_size = self.policies["images"]["output_size"]
         self.resize_images(paths)
 
     def resize_images(self, paths: list):

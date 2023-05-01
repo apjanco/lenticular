@@ -1,5 +1,5 @@
 import typer
-import yaml
+import srsly
 from pathlib import Path
 from typing import List
 from rich import print
@@ -11,8 +11,6 @@ from .set_policies import update_policies
 from .set_secrets import set_secrets
 app = typer.Typer()
 # load policies
-policies = yaml.safe_load((Path.cwd() / "lenticular" / "policies.yaml").read_text())
-
 
 @app.command()
 def meep():
@@ -27,6 +25,8 @@ def meep():
 @app.command()
 def drive_download(id: str = typer.Argument(..., help="Google Drive ID")):
     "Download a file or folder from Drive. Requires an ID"
+    policies = srsly.read_yaml("./lenticular/policies.yaml")
+
     if id:
         drive = Drive()
         data = drive.get_file_by_id(id)
@@ -81,6 +81,7 @@ def box_download(id: str = typer.Argument(..., help="Box ID")):
 def normalize(
     paths: List[Path] = typer.Argument(None, help="Paths on your machine to normalize.")
 ):
+    policies = srsly.read_yaml("./lenticular/policies.yaml")
     if not paths:
         paths = [policies["output_path"]]
     Filenames(paths)  # TODO add tag to run or not run this
@@ -93,11 +94,14 @@ def dataset(
     path: Path = typer.Argument(
         None, help="Transform a folder of images into a dataset."
     ),
-    dataset_name: str = typer.Option("dataset", help="Name of the dataset to create."),
+    huggingface_org: str = typer.Option("ajanco", help="Hugging Face user or organization name."),
+    dataset_name: str = typer.Option("lenticular-dataset", help="Name of the dataset to create."),
 ):
+    policies = srsly.read_yaml("./lenticular/policies.yaml")
     if not path:
         path = Path(policies["output_path"])
-    create_dataset(path, dataset_name)
+    dataset_name = f"{huggingface_org}/{dataset_name}"
+    create_dataset(dataset_name)
 
 
 @app.command()

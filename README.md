@@ -17,6 +17,16 @@ curl -sSL https://install.python-poetry.org | python3 -
 poetry install
 ```
 
+If you are using Tesseract for OCR, you'll also need:
+```
+apt-get install python-dev libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr \
+flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev swig
+```
+Tesseract only supports English by default. You may also need to install support for your project's languages. A full list of supported languages can be found [here](https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html).  
+```bash 
+apt-get install tesseract-ocr-yor # Yoruba
+```
+
 # Basic Usage
 
 1. [Set API keys for Drive and/or Box](./secrets)
