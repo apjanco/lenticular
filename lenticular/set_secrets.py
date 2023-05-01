@@ -45,6 +45,7 @@ def set_secrets():
         )
         # download credentials.json file
         new_secret_value = input(f"Paste the contents of your credentials.json file here: ")    
+        new_secret_value = srsly.json_loads(new_secret_value)
         if new_secret_value:
             srsly.write_json("./lenticular/credentials.json", new_secret_value)
         else:
