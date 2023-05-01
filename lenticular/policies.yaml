@@ -1,11 +1,13 @@
+dataset_name: those_data
+huggingface_org: ajanco
 images:
   ocr: vision
   output_format: png
   output_size: 2000000
+languages:
+- en
+- es
 output_path: /srv/projects/my_project
-project_name: This Project
-slugify: true
-languages: ['en', 'fr']
-huggingface_org: ajanco
-dataset_name: my_dataset
 private_repo: true
+project_name: This Project
+slugify: false

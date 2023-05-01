@@ -74,11 +74,11 @@ lenticular dataset
 
 Add OCR text using Vision
 ```bash
-lenticular 
+lenticular process
 ```
 
-Push the files and metadata to Huggingface Hub
+Push updated files and data to Huggingface Hub
 ```bash
-lenticular 
+lenticular dataset
 ```
 
