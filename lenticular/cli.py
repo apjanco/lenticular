@@ -90,18 +90,8 @@ def normalize(
 
 
 @app.command()
-def dataset(
-    path: Path = typer.Argument(
-        None, help="Transform a folder of images into a dataset."
-    ),
-    huggingface_org: str = typer.Option("ajanco", help="Hugging Face user or organization name."),
-    dataset_name: str = typer.Option("lenticular-dataset", help="Name of the dataset to create."),
-):
-    policies = srsly.read_yaml("./lenticular/policies.yaml")
-    if not path:
-        path = Path(policies["output_path"])
-    dataset_name = f"{huggingface_org}/{dataset_name}"
-    create_dataset(dataset_name)
+def dataset():
+    create_dataset()
 
 
 @app.command()
