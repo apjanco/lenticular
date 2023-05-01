@@ -25,9 +25,9 @@ theme:
 
 nav:
 - Get Started: index.md
-- Workflow: workflow.md
 - Secrets: secrets.md
 - Policies: policies.md
+- Workflow: workflow.md
 - Drive: drive.md
 - Box: box.md
 - Normalization: normalization.md

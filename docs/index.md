@@ -2,10 +2,20 @@ We often work with partners who have materials stored in cloud services like Goo
 
 # Installation
 
+```bash 
+git clone https://github.com/apjanco/lenticular.git
+cd lenticular 
 ```
-pip install lenticular
+Install poetry if you don't have it: 
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
 ```
-
+then 
+```bash
+poetry shell  # create a virtual environment
+poetry install # install dependencies
+lenticular 
+```
 
 # Basic Usage
 
