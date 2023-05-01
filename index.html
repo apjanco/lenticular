@@ -365,8 +365,17 @@
 
 <p>We often work with partners who have materials stored in cloud services like Google Drive and Box.  This is a library for accessing those materials. This allows partners to use familiar technologies to manage their data, while developers can fetch and normalize data for projects. </p>
 <h1 id="installation">Installation</h1>
-<div class="highlight"><pre><span></span><code>pip install lenticular
+<p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/apjanco/lenticular.git
+<span class="nb">cd</span><span class="w"> </span>lenticular<span class="w"> </span>
 </code></pre></div>
+Install poetry if you don't have it: 
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sSL<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-
+</code></pre></div>
+then 
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>shell<span class="w">  </span><span class="c1"># create a virtual environment</span>
+poetry<span class="w"> </span>install<span class="w"> </span><span class="c1"># install dependencies</span>
+lenticular<span class="w"> </span>
+</code></pre></div></p>
 <h1 id="basic-usage">Basic Usage</h1>
 <ol>
 <li>
