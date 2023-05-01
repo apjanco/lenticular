@@ -19,9 +19,15 @@ lenticular
 
 # Get Started
 
-1. [Enter API keys for Drive and/or Box](./secrets)
+1. Set project [policies](./policies) for file naming and normalization. 
+    ```bash
+    lenticular policies
+    ```
 
-2. [Set project policies for file naming and normalization](./policies).
+2. Enter API keys for Drive and/or Box
+    ```bash
+    lenticular secrets
+    ```
 
 3. Download from [Drive](./drive) 
     ```bash
