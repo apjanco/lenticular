@@ -17,37 +17,39 @@ poetry install # install dependencies
 lenticular 
 ```
 
-# Basic Usage
+# Get Started
 
-1. [Set API keys for Drive and/or Box](./secrets)
+1. [Enter API keys for Drive and/or Box](./secrets)
 
-2. [Create a project and set the file policies](./policies).
+2. [Set project policies for file naming and normalization](./policies).
 
-3. Google Drive  
-
-    `$ lenticular drive-download 1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G`  
-    or
-    ```python 
-    from lenticular.drive import Drive 
-
-    drive = Drive() 
-
-    drive.download_folder('1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G')
+3. Download from [Drive](./drive) 
+    ```bash
+    lenticular drive-download 1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G
     ```
 
-    > more on [Drive](./drive)
-
-4. Box 
-
-    `$ lenticular box-download 160107962928`  
-    or
-    ```python 
-    from lenticular.box import Box
-
-    client = Box() 
-
-    client.download_folder('160107962928')
+4. Download from [Box](./box)
+    ```bash
+    lenticular box-download 173302952002
+    ```
+5. Normalize files
+    ```bash
+    lenticular normalize
     ```
 
-    > more on [Box](./box)
+6. Create or update a dataset from files
+    ```bash
+    lenticular dataset
+    ```
+
+7. Add OCR text using Vision
+    ```bash
+    lenticular process
+    ```
+
+8. Push updated files and data to Huggingface Hub
+    ```bash
+    lenticular dataset
+    ```
+
 
