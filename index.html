@@ -376,41 +376,43 @@ then
 poetry<span class="w"> </span>install<span class="w"> </span><span class="c1"># install dependencies</span>
 lenticular<span class="w"> </span>
 </code></pre></div></p>
-<h1 id="basic-usage">Basic Usage</h1>
+<h1 id="get-started">Get Started</h1>
 <ol>
 <li>
-<p><a href="./secrets">Set API keys for Drive and/or Box</a></p>
+<p><a href="./secrets">Enter API keys for Drive and/or Box</a></p>
 </li>
 <li>
-<p><a href="./policies">Create a project and set the file policies</a>.</p>
+<p><a href="./policies">Set project policies for file naming and normalization</a>.</p>
 </li>
 <li>
-<p>Google Drive  </p>
-<p><code>$ lenticular drive-download 1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G</code><br />
-or
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lenticular.drive</span> <span class="kn">import</span> <span class="n">Drive</span> 
-
-<span class="n">drive</span> <span class="o">=</span> <span class="n">Drive</span><span class="p">()</span> 
-
-<span class="n">drive</span><span class="o">.</span><span class="n">download_folder</span><span class="p">(</span><span class="s1">&#39;1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G&#39;</span><span class="p">)</span>
+<p>Download from <a href="./drive">Drive</a> 
+    <div class="highlight"><pre><span></span><code>lenticular<span class="w"> </span>drive-download<span class="w"> </span>1R8JA-C_QxSdekKfRfetj5j4fbjFXJu6G
 </code></pre></div></p>
-<blockquote>
-<p>more on <a href="./drive">Drive</a></p>
-</blockquote>
 </li>
 <li>
-<p>Box </p>
-<p><code>$ lenticular box-download 160107962928</code><br />
-or
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lenticular.box</span> <span class="kn">import</span> <span class="n">Box</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">Box</span><span class="p">()</span> 
-
-<span class="n">client</span><span class="o">.</span><span class="n">download_folder</span><span class="p">(</span><span class="s1">&#39;160107962928&#39;</span><span class="p">)</span>
+<p>Download from <a href="./box">Box</a>
+    <div class="highlight"><pre><span></span><code>lenticular<span class="w"> </span>box-download<span class="w"> </span><span class="m">173302952002</span>
 </code></pre></div></p>
-<blockquote>
-<p>more on <a href="./box">Box</a></p>
-</blockquote>
+</li>
+<li>
+<p>Normalize files
+    <div class="highlight"><pre><span></span><code>lenticular<span class="w"> </span>normalize
+</code></pre></div></p>
+</li>
+<li>
+<p>Create or update a dataset from files
+    <div class="highlight"><pre><span></span><code>lenticular<span class="w"> </span>dataset
+</code></pre></div></p>
+</li>
+<li>
+<p>Add OCR text using Vision
+    <div class="highlight"><pre><span></span><code>lenticular<span class="w"> </span>process
+</code></pre></div></p>
+</li>
+<li>
+<p>Push updated files and data to Huggingface Hub
+    <div class="highlight"><pre><span></span><code>lenticular<span class="w"> </span>dataset
+</code></pre></div></p>
 </li>
 </ol>
 
