@@ -1,6 +1,6 @@
 # 😶‍🌫️ Thematic Research Collections with Lenticular
 
-Lenticular is a developer tool to create thematic research collections. These collections contain materials that are relelvant to a specific research project and often include a mix of photographs, notes, and other sources gathered along the way. Lenticular is focused primarily on research outcomes rather than preservation or presentation of project materials. Data can be packaged and exported to other tools for those tasks. 
+Lenticular is a developer tool to create thematic research collections[^1]. These collections contain materials that are relelvant to a specific research project and often include a mix of photographs, notes, and other sources gathered along the way. Lenticular is focused primarily on research outcomes rather than preservation or presentation of project materials. Data can be packaged and exported to other tools for those tasks. 
 
 Lenticular builds on the example of David Bamman's [BookNLP](https://github.com/booknlp/booknlp), which is a natural language processing pipeline to generate research data from novels. BookNLP processes a novel's text and returns structured data for analysis, including charachter name clustering, quotation speaker identification, event tagging and other metadata relevant to the literary analysis of a corpus. BookNLP turns raw text into structured research data. 
 
@@ -37,3 +37,6 @@ The static site can be accessed in the browser. It builds from the examples of [
   - Recommended topics, arguments, relevance to existing knowledge
 6. Research interface
   - "Talk to PDF" style bot to interact with the collection? Would need [LangChain.js](https://js.langchain.com/docs/get_started/introduction) 
+
+
+[^1]: "...a digital collection of primary sources gathered to support research on a theme." Fenlon, Katrina. "Thematic Research Collections: Libraries and the Evolution of Alternative Digital Publishing in the Humanities." Library Trends 65, no. 4 (2017): 523-539. https://doi.org/10.1353/lib.2017.0016.
