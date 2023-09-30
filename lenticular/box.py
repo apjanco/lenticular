@@ -74,9 +74,11 @@ class Box:
             if not output_path.endswith("/"):
                 output_path = output_path + "/"
         contents = self.folder_contents(folder_id)
-
+        print(f"found {len(contents)} folders")
+        pbar = tqdm(total=len(contents), desc="Downloading files")
         # Get all folders and create them if they don't exist
         folders = set([i["path"] for i in contents])
+        print(f"found {len(folder)} subfolders")
         for folder in folders:
             save_path = Path(output_path + folder)
             if not save_path.exists():
@@ -93,13 +95,13 @@ class Box:
             async with aiofiles.open(
                 os.path.join(output_path, item["path"], item["name"]), "wb"
             ) as outfile:
-                pbar.update(1)
                 await outfile.write(data)
+                pbar.update(1)
 
         # TODO add progress bar
         loop = asyncio.get_event_loop()
         tasks = [loop.create_task(fetch_file(f)) for f in contents]
-        pbar = tqdm(total=len(contents), desc="Downloading files")
+        
         loop.run_until_complete(asyncio.wait(tasks))
         loop.close()
 

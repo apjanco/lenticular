@@ -1,13 +1,13 @@
-dataset_name: those_data
+dataset_name: FMB
 huggingface_org: ajanco
 images:
   ocr: vision
-  output_format: png
+  output_format: jpeg
   output_size: 2000000
 languages:
 - en
 - es
-output_path: /srv/projects/my_project
+output_path: /srv/projects/FMB-data
 private_repo: true
-project_name: This Project
-slugify: false
+project_name: FMB
+slugify: true

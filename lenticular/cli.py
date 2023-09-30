@@ -9,6 +9,7 @@ from .normalize import Filenames, Images
 from .huggingface.dataset import create_dataset
 from .set_policies import update_policies
 from .set_secrets import set_secrets
+from .vision import Vision
 app = typer.Typer()
 # load policies
 
@@ -97,3 +98,13 @@ def dataset():
 @app.command()
 def publish(dataset_path: str = typer.Argument(..., help="Dataset to publish.")):
     print(dataset_path)
+
+@app.command()
+def ocr():
+    policies = srsly.read_yaml("./lenticular/policies.yaml")
+    tool = policies['images']['ocr']
+    if tool == 'tesseract':
+        print('🔎 Using Tesseract for OCR')
+    elif tool == 'vision':
+        print('🔎 Using Google Vision for OCR')
+        Vision()
