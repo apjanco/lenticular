@@ -23,11 +23,11 @@ Lenticular offers a similar pipline for processing and packaging research collec
   - ...metrics for OCR, LLM performance
   - [Datasheets for datasets](https://arxiv.org/abs/1803.09010)
   - [Model cards](https://huggingface.co/docs/hub/model-cards)
-### Packaging and Publishing of data 
+### Packaging and Publishing of Data 
 - HugginFace-style. Parquet (package as exchange file HF-Hub)
 - GitHub repo-style. Directory and files (image, metadata, text, embeddings, etc.)
 
-### Packaging as static website 
+### Publishing as static website 
 The static site can be accessed in the browser. It builds from the examples of [Collection Builder](https://collectionbuilder.github.io/) and [Wax](https://minicomp.github.io/wax/). It also provides research functionality more like [Google pinpoint](https://journaliststudio.google.com/pinpoint/about), [Talk to Books](https://books.google.com/talktobooks/) and [Palladio](https://hdlab.stanford.edu/palladio/).
 -  Search Index with [PageFind](https://pagefind.app/)
 - Collection description
